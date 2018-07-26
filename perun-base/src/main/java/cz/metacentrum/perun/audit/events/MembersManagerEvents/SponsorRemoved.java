@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.MembersManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Member;
 import cz.metacentrum.perun.core.api.User;
 
-public class SponsorRemoved {
+public class SponsorRemoved implements AuditEvent {
 
 	private Member sponsoredMember;
 	private User sponsor;
@@ -18,6 +19,7 @@ public class SponsorRemoved {
 	public SponsorRemoved() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.ExtSourcesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.ExtSource;
 import cz.metacentrum.perun.core.api.Vo;
 
-public class ExtSourceAddedToVo {
+public class ExtSourceAddedToVo implements AuditEvent {
 	private ExtSource source;
 	private Vo vo;
 
@@ -42,6 +43,7 @@ public class ExtSourceAddedToVo {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

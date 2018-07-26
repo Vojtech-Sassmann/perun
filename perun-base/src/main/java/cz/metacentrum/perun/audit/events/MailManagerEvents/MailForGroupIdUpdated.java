@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.MailManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.registrar.model.ApplicationMail;
 
-public class MailForGroupIdUpdated {
+public class MailForGroupIdUpdated implements AuditEvent {
 
 	private ApplicationMail mail;
 	private Group group;
@@ -18,6 +19,7 @@ public class MailForGroupIdUpdated {
 	public MailForGroupIdUpdated() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

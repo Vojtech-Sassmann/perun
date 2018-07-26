@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.ServicesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.AttributeDefinition;
 import cz.metacentrum.perun.core.api.Service;
 
-public class RequiredAttributeRemovedFromService {
+public class RequiredAttributeRemovedFromService implements AuditEvent {
 
 	private AttributeDefinition attributeDefinition;
 	private Service service;
@@ -18,6 +19,7 @@ public class RequiredAttributeRemovedFromService {
 		this.service = service;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

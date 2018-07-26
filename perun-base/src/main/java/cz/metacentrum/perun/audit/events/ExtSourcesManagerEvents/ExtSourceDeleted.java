@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.ExtSourcesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.ExtSource;
 
-public class ExtSourceDeleted {
+public class ExtSourceDeleted implements AuditEvent {
 	private ExtSource extSource;
 	private String name = this.getClass().getName();
 	private String message;
@@ -30,6 +31,7 @@ public class ExtSourceDeleted {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

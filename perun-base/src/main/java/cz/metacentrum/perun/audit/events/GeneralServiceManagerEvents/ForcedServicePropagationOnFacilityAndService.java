@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.GeneralServiceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 import cz.metacentrum.perun.core.api.Service;
 
-public class ForcedServicePropagationOnFacilityAndService {
+public class ForcedServicePropagationOnFacilityAndService implements AuditEvent {
 
 
 	private String forcePropagation;
@@ -21,6 +22,7 @@ public class ForcedServicePropagationOnFacilityAndService {
 	public ForcedServicePropagationOnFacilityAndService() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

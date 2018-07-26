@@ -1,11 +1,9 @@
 package cz.metacentrum.perun.audit.events.AuthorshipManagementEvents;
 
-import com.google.gwt.thirdparty.json.JSONObject;
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.cabinet.model.Authorship;
-import jdk.nashorn.api.scripting.JSObject;
-import org.codehaus.jackson.map.util.JSONPObject;
 
-public class AuthorshipDeleted {
+public class AuthorshipDeleted implements AuditEvent {
 	private Authorship authorship;
 	private String name = this.getClass().getName();
 	private String message;
@@ -33,6 +31,7 @@ public class AuthorshipDeleted {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

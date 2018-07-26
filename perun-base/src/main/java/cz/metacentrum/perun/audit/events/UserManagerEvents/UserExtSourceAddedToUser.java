@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.UserManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.User;
 import cz.metacentrum.perun.core.api.UserExtSource;
 
-public class UserExtSourceAddedToUser {
+public class UserExtSourceAddedToUser implements AuditEvent {
 
 	private UserExtSource userExtSource;
 	private User user;
@@ -18,6 +19,7 @@ public class UserExtSourceAddedToUser {
 		this.userExtSource = userExtSource;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

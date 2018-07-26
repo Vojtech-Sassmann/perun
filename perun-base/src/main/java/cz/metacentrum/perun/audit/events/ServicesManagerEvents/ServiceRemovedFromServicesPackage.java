@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.ServicesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Service;
 import cz.metacentrum.perun.core.api.ServicesPackage;
 
-public class ServiceRemovedFromServicesPackage {
+public class ServiceRemovedFromServicesPackage implements AuditEvent {
 
 	private Service service;
 	private ServicesPackage servicesPackage;
@@ -18,6 +19,7 @@ public class ServiceRemovedFromServicesPackage {
 		this.servicesPackage = servicesPackage;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

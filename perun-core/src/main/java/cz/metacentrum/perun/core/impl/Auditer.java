@@ -1,5 +1,6 @@
 package cz.metacentrum.perun.core.impl;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.AuditMessage;
 import cz.metacentrum.perun.core.api.BeansUtils;
 import cz.metacentrum.perun.core.api.PerunBean;
@@ -110,7 +111,6 @@ public class Auditer {
 			} else {
 				msg = rs.getString("msg");
 			}
-
 			// Get principal User and his ID (null, if no user exist)
 			Integer principalUserId = null;
 			if (rs.getInt("created_by_uid") != 0) principalUserId = rs.getInt("created_by_uid");
@@ -172,6 +172,8 @@ public class Auditer {
 	 * @param message
 	 * @throws InternalErrorException
 	 */
+	@Deprecated
+	//TODO remove and create new version of this method that will accept object of AuditEvent
 	public void log(PerunSession sess, String message) throws InternalErrorException {
 		if(TransactionSynchronizationManager.isActualTransactionActive()) {
 			log.trace("Auditer stores audit message to current transaction. Message: {}.", message);
@@ -199,7 +201,7 @@ public class Auditer {
 	 * @throws InternalErrorException
 	 * @author Richard Husár 445238@mail.muni.cz
 	 */
-	public void log(PerunSession sess, Object event) throws InternalErrorException {
+	public void log(PerunSession sess, AuditEvent event) throws InternalErrorException {
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enableDefaultTyping();
@@ -242,6 +244,7 @@ public class Auditer {
 	 * @return json string without message attribute
 	 * @author Richard Husár 445238@mail.muni.cz
 	 */
+	//TODO what this method actually do?
 	public String getMessageWithoutMessageAttribute(String jsonString) {
 		return jsonString.replaceAll(",?(\\r\\n|\\r|\\n)?\\s*\"message\":\".*\",?", "");
 	}
@@ -260,26 +263,26 @@ public class Auditer {
 
 	/**
 	 * Log mesage. Substitute first {} with arg1.toString().
-	 *
 	 * IMPORTANT: This method stores the message aside from DB transaction.
 	 *
 	 * @param message
 	 * @param arg1
 	 * @throws InternalErrorException
 	 */
+	//TODO change String to AuditEvent, also tests where this method is used, needs to be updated
 	public void logWithoutTransaction(PerunSession sess, String message, Object arg1) throws InternalErrorException {
 		logWithoutTransaction(sess, message, arg1, null);
 	}
 
 	/**
 	 * Log mesage. Substitute first two {} with arg1.toString() and arg2.toString().
-	 *
 	 * IMPORTANT: This method stores the message aside from DB transaction.
 	 *
 	 * @param message
 	 * @param arg1
 	 * @throws InternalErrorException
 	 */
+	//TODO change String to Audit event
 	public void logWithoutTransaction(PerunSession sess, String message, Object arg1, Object arg2) throws InternalErrorException {
 		message = BeansUtils.createEscaping(message);
 		Object[] objects = new Object[2];
@@ -330,7 +333,6 @@ public class Auditer {
 	 * in the list.
 	 *
 	 * @param arg (object)
-	 *
 	 * @return arg (object)
 	 */
 	private Object serializeObject(Object arg) {
@@ -360,7 +362,6 @@ public class Auditer {
 
 	/**
 	 * Initialize new lists for sotring Audit messages.
-	 *
 	 */
 	public void newTopLevelTransaction() {
 		List<List<List<AuditerMessage>>> topLevelTransactions = (List<List<List<AuditerMessage>>>) TransactionSynchronizationManager.getResource(this);
@@ -381,7 +382,6 @@ public class Auditer {
 
 	/**
 	 * Creates new list for saving auditer messages of a new nested transactions.
-	 *
 	 */
 	public void newNestedTransaction() {
 		List<List<List<AuditerMessage>>> topLevelTransactions = getTopLevelTransactions();
@@ -393,7 +393,6 @@ public class Auditer {
 	/**
 	 * Flush auditer messages of the last messages to the store of the outer transaction.
 	 * There should be at least one nested transaction.
-	 *
 	 */
 	public void flushNestedTransaction() {
 		List<List<List<AuditerMessage>>> topLevelTransactions = getTopLevelTransactions();
@@ -410,7 +409,6 @@ public class Auditer {
 
 	/**
 	 * Erases the auditer messages for the last transaction.
-	 *
 	 */
 	public void cleanNestedTransation() {
 		List<List<List<AuditerMessage>>> topLevelTransactions = getTopLevelTransactions();
@@ -618,6 +616,7 @@ public class Auditer {
 	 *
 	 * @param messages list of AuditerMessages
 	 */
+	//TODO how this method differ from storeMessageToDb?
 	public void storeMessagesToDb(final List<AuditerMessage> messages) {
 		final List<Integer> ids = new ArrayList<>();
 		final List<PubsubMechanizm.Pair<AuditerMessage, Integer>> msgs = new ArrayList<>();
@@ -665,6 +664,7 @@ public class Auditer {
 	 * @param messages takes pair of auditer message to be stored and id of message from audit_log
 	 * @author Richard Husár 445238@mail.muni.cz
 	 */
+	//TODO how this method differs from storeMessageToDbJson?
 	public void storeMessagesToDbJson(final List<PubsubMechanizm.Pair<AuditerMessage, Integer>> messages) {
 		synchronized (LOCK_DB_TABLE_AUDITER_LOG_JSON) {
 			try {
@@ -703,6 +703,7 @@ public class Auditer {
 	 * @param sess
 	 * @param message
 	 */
+	//TODO edit this method to take AuditEvent instead of String
 	public void storeMessageToDb(final PerunSession sess, final String message) {
 		int id = -1;
 		synchronized (LOCK_DB_TABLE_AUDITER_LOG) {
@@ -713,6 +714,8 @@ public class Auditer {
 						new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
 							public void setValues(PreparedStatement ps, LobCreator lobCreator) throws SQLException {
 								ps.setInt(1, msgId);
+								//TODO when the message type is changed to AuditEvent, the message string can be directly
+								//TODO accessed from the auditEvent object
 								lobCreator.setClobAsString(ps, 2, getMessageFromJsonString(message)); //old format message
 								ps.setString(3, sess.getPerunPrincipal().getActor());
 								ps.setInt(4, sess.getPerunPrincipal().getUserId());

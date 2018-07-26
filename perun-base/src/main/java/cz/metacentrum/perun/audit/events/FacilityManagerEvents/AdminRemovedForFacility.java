@@ -1,10 +1,10 @@
 package cz.metacentrum.perun.audit.events.FacilityManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
-import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.core.api.User;
 
-public class AdminRemovedForFacility {
+public class AdminRemovedForFacility implements AuditEvent {
 
 	private User user;
 	private Facility facility;
@@ -44,6 +44,7 @@ public class AdminRemovedForFacility {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

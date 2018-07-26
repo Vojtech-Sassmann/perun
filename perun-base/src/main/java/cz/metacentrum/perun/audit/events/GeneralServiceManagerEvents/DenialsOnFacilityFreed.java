@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.GeneralServiceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 
-public class DenialsOnFacilityFreed {
+public class DenialsOnFacilityFreed implements AuditEvent {
 	private String freeAllDen;
 	private Facility facility;
 	private String name = this.getClass().getName();
@@ -16,6 +17,7 @@ public class DenialsOnFacilityFreed {
 	public DenialsOnFacilityFreed() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

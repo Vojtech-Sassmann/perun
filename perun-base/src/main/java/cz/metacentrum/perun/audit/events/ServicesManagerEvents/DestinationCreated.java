@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.ServicesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Destination;
 
-public class DestinationCreated {
+public class DestinationCreated implements AuditEvent {
 
 	private Destination destination;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class DestinationCreated {
 		this.destination = destination;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

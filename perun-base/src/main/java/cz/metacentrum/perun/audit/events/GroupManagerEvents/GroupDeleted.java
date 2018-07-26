@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.GroupManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 
-public class GroupDeleted {
+public class GroupDeleted implements AuditEvent {
 
 	private Group group;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class GroupDeleted {
 	public GroupDeleted() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

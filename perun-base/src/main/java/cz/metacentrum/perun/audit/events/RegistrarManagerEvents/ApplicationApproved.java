@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.RegistrarManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.registrar.model.Application;
 
-public class ApplicationApproved {
+public class ApplicationApproved implements AuditEvent {
 
 	private Application app;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class ApplicationApproved {
 		this.app = app;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

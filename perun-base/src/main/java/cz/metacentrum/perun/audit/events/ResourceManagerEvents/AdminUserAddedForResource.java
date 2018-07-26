@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.ResourceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Resource;
 import cz.metacentrum.perun.core.api.User;
 
-public class AdminUserAddedForResource {
+public class AdminUserAddedForResource implements AuditEvent {
 
 	private User user;
 	private Resource resource;
@@ -18,6 +19,7 @@ public class AdminUserAddedForResource {
 	public AdminUserAddedForResource() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

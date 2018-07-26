@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.MembersManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Member;
 import cz.metacentrum.perun.core.api.Status;
 
-public class MemberValidatedFailed {
+public class MemberValidatedFailed implements AuditEvent {
 
 	private Member member;
 	private Status status;
@@ -18,6 +19,7 @@ public class MemberValidatedFailed {
 	public MemberValidatedFailed() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

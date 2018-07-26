@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.AuthorshipManagementEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.cabinet.model.Authorship;
 
-public class AuthorshipCreated {
+public class AuthorshipCreated implements AuditEvent {
 
 	private Authorship authorship;
 	private String name = this.getClass().getName();
@@ -32,6 +33,7 @@ public class AuthorshipCreated {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

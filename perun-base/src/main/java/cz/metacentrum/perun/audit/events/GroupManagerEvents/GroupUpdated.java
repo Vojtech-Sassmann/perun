@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.GroupManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 
-public class GroupUpdated {
+public class GroupUpdated implements AuditEvent {
 	private Group group;
 	private String name = this.getClass().getName();
 	private String message;
@@ -14,6 +15,7 @@ public class GroupUpdated {
 	public GroupUpdated() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

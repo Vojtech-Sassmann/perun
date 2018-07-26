@@ -1,12 +1,13 @@
 package cz.metacentrum.perun.audit.events.ResourceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 import cz.metacentrum.perun.core.api.Resource;
 import cz.metacentrum.perun.core.api.Service;
 
 import java.util.List;
 
-public class ResourceDeleted {
+public class ResourceDeleted implements AuditEvent {
 
 	private Resource resource;
 	private Facility facility;
@@ -24,6 +25,7 @@ public class ResourceDeleted {
 		this.services = services;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

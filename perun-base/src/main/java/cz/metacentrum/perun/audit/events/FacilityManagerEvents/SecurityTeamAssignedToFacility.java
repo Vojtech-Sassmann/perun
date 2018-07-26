@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.FacilityManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 import cz.metacentrum.perun.core.api.SecurityTeam;
 
-public class SecurityTeamAssignedToFacility {
+public class SecurityTeamAssignedToFacility implements AuditEvent {
 	private SecurityTeam securityTeam;
 	private Facility facility;
 	private String name = this.getClass().getName();
@@ -17,6 +18,7 @@ public class SecurityTeamAssignedToFacility {
 	public SecurityTeamAssignedToFacility() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

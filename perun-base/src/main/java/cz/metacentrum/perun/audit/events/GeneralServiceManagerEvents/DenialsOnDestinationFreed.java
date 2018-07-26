@@ -1,6 +1,8 @@
 package cz.metacentrum.perun.audit.events.GeneralServiceManagerEvents;
 
-public class DenialsOnDestinationFreed {
+import cz.metacentrum.perun.audit.events.AuditEvent;
+
+public class DenialsOnDestinationFreed implements AuditEvent {
 
 	private String freeAllDen;
 	private int destinationId;
@@ -15,6 +17,7 @@ public class DenialsOnDestinationFreed {
 	public DenialsOnDestinationFreed() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

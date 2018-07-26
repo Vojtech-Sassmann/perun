@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.RegistrarManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.registrar.model.ApplicationForm;
 
-public class FormItemAdded {
+public class FormItemAdded implements AuditEvent {
 
 	private ApplicationForm form;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class FormItemAdded {
 		this.form = form;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

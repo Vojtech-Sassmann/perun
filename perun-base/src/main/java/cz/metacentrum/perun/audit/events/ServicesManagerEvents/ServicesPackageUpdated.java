@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.ServicesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.ServicesPackage;
 
-public class ServicesPackageUpdated {
+public class ServicesPackageUpdated implements AuditEvent {
 	private ServicesPackage servicesPackage;
 	private String name = this.getClass().getName();
 	private String message;
@@ -14,6 +15,7 @@ public class ServicesPackageUpdated {
 		this.servicesPackage = servicesPackage;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

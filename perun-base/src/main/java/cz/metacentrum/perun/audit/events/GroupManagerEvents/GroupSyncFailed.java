@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.GroupManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 
-public class GroupSyncFailed {
+public class GroupSyncFailed implements AuditEvent {
 
 	private Group group;
 	private String originalExceptionMessage;
@@ -17,6 +18,7 @@ public class GroupSyncFailed {
 	public GroupSyncFailed() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

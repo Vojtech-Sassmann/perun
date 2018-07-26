@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.AttributesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Resource;
 
-public class AllGroupResourceAttributesRemovedForGroups {
+public class AllGroupResourceAttributesRemovedForGroups implements AuditEvent {
 
 	private Resource resource;
 	private String name = this.getClass().getName();
@@ -31,6 +32,7 @@ public class AllGroupResourceAttributesRemovedForGroups {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.SecurityTeamsManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.SecurityTeam;
 
-public class SecurityTeamDeleted {
+public class SecurityTeamDeleted implements AuditEvent {
 	private SecurityTeam securityTeam;
 	private String name = this.getClass().getName();
 	private String message;
@@ -14,6 +15,7 @@ public class SecurityTeamDeleted {
 		this.securityTeam = securityTeam;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

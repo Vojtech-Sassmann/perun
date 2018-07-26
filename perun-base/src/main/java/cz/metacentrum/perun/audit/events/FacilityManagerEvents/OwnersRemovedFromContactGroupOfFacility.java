@@ -1,10 +1,11 @@
 package cz.metacentrum.perun.audit.events.FacilityManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.ContactGroup;
 
 import java.util.List;
 
-public class OwnersRemovedFromContactGroupOfFacility {
+public class OwnersRemovedFromContactGroupOfFacility implements AuditEvent {
 	private List<Integer> ownersId;
 	private ContactGroup contactGroup;
 	private String message;
@@ -18,6 +19,7 @@ public class OwnersRemovedFromContactGroupOfFacility {
 	public OwnersRemovedFromContactGroupOfFacility() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.FacilityManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 import cz.metacentrum.perun.core.api.Group;
 
-public class AdminGroupRemovedForFacility {
+public class AdminGroupRemovedForFacility implements AuditEvent {
 	private Group group;
 	private Facility facility;
 
@@ -42,6 +43,7 @@ public class AdminGroupRemovedForFacility {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.SecurityTeamsManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.User;
 
-public class UserRemovedFromBlacklists {
+public class UserRemovedFromBlacklists implements AuditEvent {
 
 	private User user;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class UserRemovedFromBlacklists {
 		this.user = user;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

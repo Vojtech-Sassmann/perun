@@ -4,7 +4,7 @@ import cz.metacentrum.perun.core.api.ContactGroup;
 
 import java.util.List;
 
-public class GroupsRemovedFromContactGroupOfFacility {
+public class GroupsRemovedFromContactGroupOfFacility implements AuditEvent {
 	private List<Integer> groupsId;
 	private ContactGroup contactGroup;
 
@@ -43,6 +43,7 @@ public class GroupsRemovedFromContactGroupOfFacility {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

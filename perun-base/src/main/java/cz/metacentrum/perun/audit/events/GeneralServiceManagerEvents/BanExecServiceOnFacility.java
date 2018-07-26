@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.GeneralServiceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 import cz.metacentrum.perun.taskslib.model.ExecService;
 
-public class BanExecServiceOnFacility {
+public class BanExecServiceOnFacility implements AuditEvent {
 
 	private String banService;
 	private ExecService execService;
@@ -20,6 +21,7 @@ public class BanExecServiceOnFacility {
 	public BanExecServiceOnFacility() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

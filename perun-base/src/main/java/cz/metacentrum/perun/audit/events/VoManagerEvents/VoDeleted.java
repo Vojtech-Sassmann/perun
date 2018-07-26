@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.VoManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Vo;
 
-public class VoDeleted {
+public class VoDeleted implements AuditEvent {
 	private Vo vo;
 	private String name = this.getClass().getName();
 	private String message;
@@ -14,6 +15,7 @@ public class VoDeleted {
 		this.vo = vo;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

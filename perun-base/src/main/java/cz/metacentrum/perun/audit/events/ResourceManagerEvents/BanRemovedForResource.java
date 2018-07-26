@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.ResourceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.BanOnResource;
 
-public class BanRemovedForResource {
+public class BanRemovedForResource implements AuditEvent {
 	private BanOnResource banOnResource;
 	private int memberId;
 	private int resourceId;
@@ -18,6 +19,7 @@ public class BanRemovedForResource {
 	public BanRemovedForResource() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

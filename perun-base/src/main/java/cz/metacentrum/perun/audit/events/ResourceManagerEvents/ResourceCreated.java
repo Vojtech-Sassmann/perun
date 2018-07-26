@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.ResourceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Resource;
 
-public class ResourceCreated {
+public class ResourceCreated implements AuditEvent {
 
 	private Resource resource;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class ResourceCreated {
 		this.resource = resource;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.ServicesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Service;
 
-public class ServiceDeleted {
+public class ServiceDeleted implements AuditEvent {
 
 	private Service service;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class ServiceDeleted {
 		this.service = service;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

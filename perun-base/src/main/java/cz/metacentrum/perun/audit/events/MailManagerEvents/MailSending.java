@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.MailManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.registrar.model.ApplicationMail;
 
-public class MailSending {
+public class MailSending implements AuditEvent {
 
 
 	private ApplicationMail mail;
@@ -20,6 +21,7 @@ public class MailSending {
 
 	//constructor
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

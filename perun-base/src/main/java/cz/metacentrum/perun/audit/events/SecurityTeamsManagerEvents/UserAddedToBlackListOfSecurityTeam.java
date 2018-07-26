@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.SecurityTeamsManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.SecurityTeam;
 import cz.metacentrum.perun.core.api.User;
 
-public class UserAddedToBlackListOfSecurityTeam {
+public class UserAddedToBlackListOfSecurityTeam implements AuditEvent {
 
 	private User user;
 	private SecurityTeam securityTeam;
@@ -21,6 +22,7 @@ public class UserAddedToBlackListOfSecurityTeam {
 
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

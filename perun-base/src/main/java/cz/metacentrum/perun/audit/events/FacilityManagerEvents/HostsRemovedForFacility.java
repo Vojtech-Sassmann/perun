@@ -1,11 +1,12 @@
 package cz.metacentrum.perun.audit.events.FacilityManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 import cz.metacentrum.perun.core.api.Host;
 
 import java.util.List;
 
-public class HostsRemovedForFacility {
+public class HostsRemovedForFacility implements AuditEvent {
 
 	private List<Host> hosts;
 	private Facility facility;
@@ -20,6 +21,7 @@ public class HostsRemovedForFacility {
 	public HostsRemovedForFacility() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

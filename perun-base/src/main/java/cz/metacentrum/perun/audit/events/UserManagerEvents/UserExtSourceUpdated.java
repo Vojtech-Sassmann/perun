@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.UserManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.UserExtSource;
 
-public class UserExtSourceUpdated {
+public class UserExtSourceUpdated implements AuditEvent {
 
 	private UserExtSource userExtSource;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class UserExtSourceUpdated {
 		this.userExtSource = userExtSource;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

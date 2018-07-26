@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.FacilityManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.BanOnFacility;
 
-public class BanUpdatedForFacility {
+public class BanUpdatedForFacility implements AuditEvent {
 	private BanOnFacility banOnFacility;
 	private int userId;
 	private int facilityId;
@@ -51,6 +52,7 @@ public class BanUpdatedForFacility {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

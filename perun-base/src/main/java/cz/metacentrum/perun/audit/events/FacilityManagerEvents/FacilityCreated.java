@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.FacilityManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 
 
-public class FacilityCreated {
+public class FacilityCreated implements AuditEvent {
 
 	private Facility facility;
 	private String name = this.getClass().getName();
@@ -32,6 +33,7 @@ public class FacilityCreated {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

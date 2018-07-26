@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.OwnersManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Owner;
 
-public class OwnerDeleted {
+public class OwnerDeleted implements AuditEvent {
 	private Owner owner;
 	private String name = this.getClass().getName();
 	private String message;
@@ -14,6 +15,7 @@ public class OwnerDeleted {
 		this.owner = owner;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

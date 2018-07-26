@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.AttributesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.UserExtSource;
 
-public class AllAttributesRemovedForUserExtSource {
+public class AllAttributesRemovedForUserExtSource implements AuditEvent {
 
 	private UserExtSource userExtSource;
 	private String name = this.getClass().getName();
@@ -31,6 +32,7 @@ public class AllAttributesRemovedForUserExtSource {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

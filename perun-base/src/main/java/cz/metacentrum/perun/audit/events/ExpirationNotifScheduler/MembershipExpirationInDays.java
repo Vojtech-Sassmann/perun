@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.ExpirationNotifScheduler;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Member;
 import cz.metacentrum.perun.core.api.Vo;
 
-public class MembershipExpirationInDays {
+public class MembershipExpirationInDays implements AuditEvent {
 
 
 	private Member member;
@@ -54,6 +55,7 @@ public class MembershipExpirationInDays {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

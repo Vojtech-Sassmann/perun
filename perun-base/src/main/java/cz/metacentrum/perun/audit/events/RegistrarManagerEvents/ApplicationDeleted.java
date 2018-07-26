@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.RegistrarManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.registrar.model.Application;
 
-public class ApplicationDeleted {
+public class ApplicationDeleted implements AuditEvent {
 	private Application app;
 	private String name = this.getClass().getName();
 	private String message;
@@ -14,6 +15,7 @@ public class ApplicationDeleted {
 		this.app = app;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

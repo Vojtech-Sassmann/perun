@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.MembersManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Member;
 
-public class MemberDeleted {
+public class MemberDeleted implements AuditEvent {
 
 	private Member member;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class MemberDeleted {
 		this.member = member;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

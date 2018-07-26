@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.ServicesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Facility;
 
-public class DestinationsRemovedFromAllServices {
+public class DestinationsRemovedFromAllServices implements AuditEvent {
 
 	private Facility facility;
 	private String name = this.getClass().getName();
@@ -15,6 +16,7 @@ public class DestinationsRemovedFromAllServices {
 		this.facility = facility;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

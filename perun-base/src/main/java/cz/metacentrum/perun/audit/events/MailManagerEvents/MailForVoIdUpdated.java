@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.MailManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Vo;
 import cz.metacentrum.perun.registrar.model.ApplicationMail;
 
-public class MailForVoIdUpdated {
+public class MailForVoIdUpdated implements AuditEvent {
 	private ApplicationMail mail;
 	private Vo vo;
 	private String name = this.getClass().getName();
@@ -17,6 +18,7 @@ public class MailForVoIdUpdated {
 	public MailForVoIdUpdated() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

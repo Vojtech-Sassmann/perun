@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.RegistrarManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Member;
 import cz.metacentrum.perun.registrar.model.Application;
 
-public class MemberCreatedForApprovedApp {
+public class MemberCreatedForApprovedApp implements AuditEvent {
 
 	private Member member;
 	private Application app;
@@ -42,6 +43,7 @@ public class MemberCreatedForApprovedApp {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

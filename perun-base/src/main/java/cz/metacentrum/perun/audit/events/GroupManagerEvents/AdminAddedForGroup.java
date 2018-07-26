@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.GroupManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.core.api.User;
 
-public class AdminAddedForGroup {
+public class AdminAddedForGroup implements AuditEvent {
 
 	private User user;
 	private Group group;
@@ -18,6 +19,7 @@ public class AdminAddedForGroup {
 	public AdminAddedForGroup() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

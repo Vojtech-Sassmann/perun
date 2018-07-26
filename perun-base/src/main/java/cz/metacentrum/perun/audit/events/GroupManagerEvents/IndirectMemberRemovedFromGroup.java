@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.GroupManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.core.api.Member;
 
-public class IndirectMemberRemovedFromGroup {
+public class IndirectMemberRemovedFromGroup implements AuditEvent {
 
 	private Member member;
 	private Group group;
@@ -18,6 +19,7 @@ public class IndirectMemberRemovedFromGroup {
 	public IndirectMemberRemovedFromGroup() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

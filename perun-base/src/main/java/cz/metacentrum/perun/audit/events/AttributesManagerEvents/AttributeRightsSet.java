@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.AttributesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.AttributeRights;
 
-public class AttributeRightsSet {
+public class AttributeRightsSet implements AuditEvent {
 	private AttributeRights right;
 	private String name = this.getClass().getName();
 	private String message;
@@ -30,6 +31,7 @@ public class AttributeRightsSet {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

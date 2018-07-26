@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.AttributesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.core.api.Member;
 
-public class AllAttributesRemovedForMemberAndGroup {
+public class AllAttributesRemovedForMemberAndGroup implements AuditEvent {
 
 	private Member member;
 	private Group group;
@@ -44,6 +45,7 @@ public class AllAttributesRemovedForMemberAndGroup {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

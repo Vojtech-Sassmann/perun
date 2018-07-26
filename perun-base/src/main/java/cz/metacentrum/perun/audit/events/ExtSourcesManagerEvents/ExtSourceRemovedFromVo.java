@@ -1,10 +1,10 @@
 package cz.metacentrum.perun.audit.events.ExtSourcesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.ExtSource;
-import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.core.api.Vo;
 
-public class ExtSourceRemovedFromVo {
+public class ExtSourceRemovedFromVo implements AuditEvent {
 
 	private ExtSource source;
 	private Vo vo;
@@ -44,6 +44,7 @@ public class ExtSourceRemovedFromVo {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.GeneralServiceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Service;
 
-public class ServicePropagationPlanedOnService {
+public class ServicePropagationPlanedOnService implements AuditEvent {
 
 	private String propagationPlanned;
 	private Service service;
@@ -17,6 +18,7 @@ public class ServicePropagationPlanedOnService {
 	public ServicePropagationPlanedOnService() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

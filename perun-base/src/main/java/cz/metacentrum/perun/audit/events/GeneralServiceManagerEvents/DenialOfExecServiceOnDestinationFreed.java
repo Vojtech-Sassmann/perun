@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.GeneralServiceManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.taskslib.model.ExecService;
 
-public class DenialOfExecServiceOnDestinationFreed {
+public class DenialOfExecServiceOnDestinationFreed implements AuditEvent {
 
 	private String freeDenOfExecservice;
 	private ExecService execService;
@@ -19,6 +20,7 @@ public class DenialOfExecServiceOnDestinationFreed {
 	public DenialOfExecServiceOnDestinationFreed() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

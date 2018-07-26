@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.AttributesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Host;
 
-public class AllAttributesRemovedForHost {
+public class AllAttributesRemovedForHost implements AuditEvent {
 
 	private Host host;
 	private String name = this.getClass().getName();
@@ -31,6 +32,7 @@ public class AllAttributesRemovedForHost {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return String.format("All attributes removed for %s.", host);
 	}

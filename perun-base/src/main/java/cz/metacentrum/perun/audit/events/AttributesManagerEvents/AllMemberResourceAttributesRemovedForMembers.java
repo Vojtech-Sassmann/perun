@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.AttributesManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Resource;
 
-public class AllMemberResourceAttributesRemovedForMembers {
+public class AllMemberResourceAttributesRemovedForMembers implements AuditEvent {
 	private Resource resource;
 	private String name = this.getClass().getName();
 	private String message = String.format("All non-virtual member-resource attributes removed for all members and %s.", resource);
@@ -30,6 +31,7 @@ public class AllMemberResourceAttributesRemovedForMembers {
 		this.name = name;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

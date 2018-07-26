@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.GroupManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 
-public class GroupSyncFinishedWithErrors {
+public class GroupSyncFinishedWithErrors implements AuditEvent {
 	private Group group;
 	private String originalExceptionMessage;
 	private String name = this.getClass().getName();
@@ -16,6 +17,7 @@ public class GroupSyncFinishedWithErrors {
 	public GroupSyncFinishedWithErrors() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

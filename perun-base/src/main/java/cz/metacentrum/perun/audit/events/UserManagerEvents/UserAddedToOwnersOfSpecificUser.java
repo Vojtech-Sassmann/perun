@@ -1,8 +1,9 @@
 package cz.metacentrum.perun.audit.events.UserManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.User;
 
-public class UserAddedToOwnersOfSpecificUser {
+public class UserAddedToOwnersOfSpecificUser implements AuditEvent {
 
 	private User user;
 	private User specificUser;
@@ -17,6 +18,7 @@ public class UserAddedToOwnersOfSpecificUser {
 		this.specificUser = specificUser;
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}

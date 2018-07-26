@@ -1,9 +1,10 @@
 package cz.metacentrum.perun.audit.events.GroupManagerEvents;
 
+import cz.metacentrum.perun.audit.events.AuditEvent;
 import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.core.api.Member;
 
-public class DirectMemberAddedToGroup {
+public class DirectMemberAddedToGroup implements AuditEvent {
 
 	private Group group;
 	private Member member;
@@ -18,6 +19,7 @@ public class DirectMemberAddedToGroup {
 	public DirectMemberAddedToGroup() {
 	}
 
+	@Override
 	public String getMessage() {
 		return toString();
 	}
