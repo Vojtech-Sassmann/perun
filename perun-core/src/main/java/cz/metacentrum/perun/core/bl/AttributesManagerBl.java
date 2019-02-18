@@ -1609,6 +1609,8 @@ public interface AttributesManagerBl {
 	 */
 	void setAttributeInNestedTransaction(PerunSession sess, Member member, Group group, Attribute attribute) throws InternalErrorException, WrongAttributeValueException, WrongAttributeAssignmentException, WrongReferenceAttributeValueException, AttributeNotExistsException;
 
+	void setAttributeInNestedTransactionWithoutCheck(PerunSession sess, Member member, Group group, Attribute attribute) throws InternalErrorException, WrongAttributeValueException, WrongAttributeAssignmentException, WrongReferenceAttributeValueException, AttributeNotExistsException;
+
 
 	/**
 	 * Store the attribute associated with the facility and user combination.  Core attributes can't be set this way.

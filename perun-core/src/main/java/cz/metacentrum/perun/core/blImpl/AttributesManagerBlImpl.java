@@ -2124,6 +2124,10 @@ public class AttributesManagerBlImpl implements AttributesManagerBl {
 		setAttribute(sess, member, group, attribute);
 	}
 
+	public void setAttributeInNestedTransactionWithoutCheck(PerunSession sess, Member member, Group group, Attribute attribute) throws InternalErrorException, WrongAttributeValueException, WrongAttributeAssignmentException, WrongReferenceAttributeValueException, AttributeNotExistsException {
+		setAttributeWithoutCheck(sess, member, group, attribute, false);
+	}
+
 	public void setAttributeInNestedTransaction(PerunSession sess, Group group, Attribute attribute) throws InternalErrorException, WrongAttributeValueException, WrongAttributeAssignmentException, WrongReferenceAttributeValueException {
 		setAttribute(sess, group, attribute);
 	}

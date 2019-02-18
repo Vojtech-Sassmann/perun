@@ -2844,7 +2844,7 @@ public class GroupsManagerBlImpl implements GroupsManagerBl {
 				if (hashCode.getValue() != null && !hashCode.getValue().equals("")) {
 					// Set hash code to member-group relationship
 					try {
-						getPerunBl().getAttributesManagerBl().setAttributeInNestedTransaction(sess, richMember, group, hashCode);
+						getPerunBl().getAttributesManagerBl().setAttributeInNestedTransactionWithoutCheck(sess, richMember, group, hashCode);
 						log.trace("Group synchronization: Setting the {} hashCode {} to member {} in group {}", new Object[]{hashCode, richMember, group});
 					} catch (WrongAttributeValueException | WrongReferenceAttributeValueException e) {
 						log.error("Group synchronization: Attribute with hash code {} can't be set to member {} in group {}", new Object[]{hashCode, richMember, group});
