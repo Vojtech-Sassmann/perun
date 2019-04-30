@@ -81,6 +81,9 @@ public class MuPasswordManagerModule implements PasswordManagerModule {
 		}
 		checkPasswordStrength(session, "--not yet known--", password);
 
+		// FIXME - disabled since we don't want to call IS MU on IDM-TEST
+		return new HashMap<>();
+		/*
 		try {
 			int requestID = (new Random()).nextInt(1000000) + 1;
 			InputStream response = makeCall(getGenerateAccountRequest(session, parameters, requestID), requestID);
@@ -89,6 +92,7 @@ public class MuPasswordManagerModule implements PasswordManagerModule {
 		} catch (IOException e) {
 			throw new InternalErrorException(e);
 		}
+		*/
 
 	}
 
@@ -111,6 +115,8 @@ public class MuPasswordManagerModule implements PasswordManagerModule {
 	public void changePassword(PerunSession sess, String userLogin, String newPassword) throws PasswordStrengthException {
 		checkPasswordStrength(sess, userLogin, newPassword);
 
+		// FIXME - disabled since we don't want to call IS MU on IDM-TEST
+		/*
 		try {
 			int requestID = (new Random()).nextInt(1000000) + 1;
 			InputStream response = makeCall(getPwdChangeRequest(sess, userLogin, newPassword, requestID), requestID);
@@ -119,6 +125,7 @@ public class MuPasswordManagerModule implements PasswordManagerModule {
 		} catch (IOException e) {
 			throw new InternalErrorException(e);
 		}
+		*/
 
 	}
 
