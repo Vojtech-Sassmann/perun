@@ -2410,6 +2410,8 @@ public interface AttributesManagerBl {
 	 */
 	List<Attribute> getRequiredAttributes(PerunSession sess, Service service, Member member, Group group) throws MemberGroupMismatchException;
 
+	Map<Member, List<Attribute>> getRequiredAttributes(PerunSession sess, Service service, List<Member> members, Group group) throws MemberGroupMismatchException;
+
 	List<Attribute> getRequiredAttributes(PerunSession sess, Service service, Member member, Group group, boolean workWithUserAttributes) throws MemberGroupMismatchException;
 
 	/**
@@ -2487,6 +2489,8 @@ public interface AttributesManagerBl {
 	List<Attribute> getRequiredAttributes(PerunSession sess, Service service, Resource resource, Group group) throws GroupResourceMismatchException;
 
 	List<Attribute> getRequiredAttributes(PerunSession sess, Service service, Group group);
+
+	HashMap<Group, List<Attribute>> getRequiredAttributesForGroups(PerunSession sess, Service service, List<Group> group);
 
 	/**
 	 * Get host attributes which are required by service
