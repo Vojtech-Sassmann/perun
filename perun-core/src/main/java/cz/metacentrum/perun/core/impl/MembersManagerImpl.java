@@ -24,6 +24,7 @@ import cz.metacentrum.perun.core.api.exceptions.SponsorshipDoesNotExistException
 import cz.metacentrum.perun.core.implApi.MembersManagerImplApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cglib.core.Local;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcPerunTemplate;
@@ -621,5 +622,12 @@ public class MembersManagerImpl implements MembersManagerImplApi {
 		if (rows == 0) {
 			throw new SponsorshipDoesNotExistException(sponsoredMember, sponsor);
 		}
+	}
+
+	@Override
+	public List<Sponsorship> getSponsorshipsExpiringInRange(PerunSession sess, LocalDate from, LocalDate to) {
+		return jdbc.query("SELECT " + memberSponsorshipSelectQuery + " FROM members_sponsored WHERE active=? AND " +
+						"validity_to >= ? AND validity_to < ?",
+				MEMBER_SPONSORSHIP_MAPPER, true, from, to);
 	}
 }

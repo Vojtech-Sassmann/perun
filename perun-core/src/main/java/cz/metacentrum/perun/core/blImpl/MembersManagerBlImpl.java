@@ -21,11 +21,13 @@ import cz.metacentrum.perun.core.api.BanOnResource;
 import cz.metacentrum.perun.core.api.BanOnVo;
 import cz.metacentrum.perun.core.api.BeansUtils;
 import cz.metacentrum.perun.core.api.Candidate;
+import cz.metacentrum.perun.core.api.EnrichedSponsorship;
 import cz.metacentrum.perun.core.api.ExtSource;
 import cz.metacentrum.perun.core.api.Facility;
 import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.core.api.Member;
 import cz.metacentrum.perun.core.api.MemberGroupStatus;
+import cz.metacentrum.perun.core.api.Perun;
 import cz.metacentrum.perun.core.api.RichUser;
 import cz.metacentrum.perun.core.api.Sponsor;
 import cz.metacentrum.perun.core.api.Sponsorship;
@@ -2485,6 +2487,11 @@ public class MembersManagerBlImpl implements MembersManagerBl {
 	                                      LocalDate newValidity) throws SponsorshipDoesNotExistException {
 		membersManagerImpl.updateSponsorshipValidity(sess, sponsoredMember, sponsor, newValidity);
 		perunBl.getAuditer().log(sess, new SponsorshipValidityUpdated(sponsoredMember, sponsor, newValidity));
+	}
+
+	@Override
+	public List<Sponsorship> getSponsorshipsExpiringInRange(PerunSession sess, LocalDate from, LocalDate to) {
+		return membersManagerImpl.getSponsorshipsExpiringInRange(sess, from, to);
 	}
 
 	/**

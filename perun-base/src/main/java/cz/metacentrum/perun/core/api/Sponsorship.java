@@ -9,24 +9,24 @@ import java.time.LocalDate;
  * @author Vojtech Sassmann <vojtech.sassmann@gmail.com>
  */
 public class Sponsorship {
-	long sponsoredId;
-	long sponsorId;
+	int sponsoredId;
+	int sponsorId;
 	LocalDate validityTo;
 	boolean active;
 
-	public long getSponsoredId() {
+	public int getSponsoredId() {
 		return sponsoredId;
 	}
 
-	public void setSponsoredId(long sponsoredId) {
+	public void setSponsoredId(int sponsoredId) {
 		this.sponsoredId = sponsoredId;
 	}
 
-	public long getSponsorId() {
+	public int getSponsorId() {
 		return sponsorId;
 	}
 
-	public void setSponsorId(long sponsorId) {
+	public void setSponsorId(int sponsorId) {
 		this.sponsorId = sponsorId;
 	}
 

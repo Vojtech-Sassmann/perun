@@ -7,10 +7,12 @@ import cz.metacentrum.perun.audit.events.ExpirationNotifScheduler.MembershipExpi
 import cz.metacentrum.perun.audit.events.ExpirationNotifScheduler.MembershipExpirationInMonthNotification;
 import cz.metacentrum.perun.audit.events.ExpirationNotifScheduler.MembershipExpired;
 
+import cz.metacentrum.perun.audit.events.ExpirationNotifScheduler.SponsorshipExpirationInAMonth;
+import cz.metacentrum.perun.audit.events.ExpirationNotifScheduler.SponsorshipExpirationInDays;
 import cz.metacentrum.perun.core.api.Attribute;
 import cz.metacentrum.perun.core.api.AttributesManager;
 import cz.metacentrum.perun.core.api.BeansUtils;
-import cz.metacentrum.perun.core.api.ExtSource;
+import cz.metacentrum.perun.core.api.EnrichedSponsorship;
 import cz.metacentrum.perun.core.api.ExtSourcesManager;
 import cz.metacentrum.perun.core.api.Group;
 import cz.metacentrum.perun.core.api.Member;
@@ -18,6 +20,7 @@ import cz.metacentrum.perun.core.api.MemberGroupStatus;
 import cz.metacentrum.perun.core.api.PerunClient;
 import cz.metacentrum.perun.core.api.PerunPrincipal;
 import cz.metacentrum.perun.core.api.PerunSession;
+import cz.metacentrum.perun.core.api.Sponsorship;
 import cz.metacentrum.perun.core.api.Status;
 import cz.metacentrum.perun.core.api.User;
 import cz.metacentrum.perun.core.api.UserExtSource;
@@ -26,6 +29,8 @@ import cz.metacentrum.perun.core.api.exceptions.AttributeNotExistsException;
 import cz.metacentrum.perun.core.api.exceptions.ExtendMembershipException;
 import cz.metacentrum.perun.core.api.exceptions.InternalErrorException;
 import cz.metacentrum.perun.core.api.exceptions.MemberGroupMismatchException;
+import cz.metacentrum.perun.core.api.exceptions.MemberNotExistsException;
+import cz.metacentrum.perun.core.api.exceptions.UserNotExistsException;
 import cz.metacentrum.perun.core.api.exceptions.WrongAttributeAssignmentException;
 import cz.metacentrum.perun.core.api.exceptions.WrongAttributeValueException;
 import cz.metacentrum.perun.core.api.exceptions.WrongReferenceAttributeValueException;
@@ -33,7 +38,6 @@ import cz.metacentrum.perun.core.bl.PerunBl;
 import cz.metacentrum.perun.core.impl.Auditer;
 import cz.metacentrum.perun.core.impl.Synchronizer;
 import cz.metacentrum.perun.core.impl.Utils;
-import cz.metacentrum.perun.core.implApi.modules.attributes.AbstractMembershipExpirationRulesModule;
 import cz.metacentrum.perun.registrar.model.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,9 +56,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static cz.metacentrum.perun.core.implApi.modules.attributes.AbstractMembershipExpirationRulesModule.autoExtensionExtSources;
 import static cz.metacentrum.perun.core.implApi.modules.attributes.AbstractMembershipExpirationRulesModule.autoExtensionLastLoginPeriod;
@@ -341,11 +346,51 @@ public class ExpirationNotifScheduler {
 
 		auditIncomingExpirations(allowedStatuses, vosMap);
 
+		auditSponsorshipExpirations();
+
 		auditOldExpirations(allowedStatuses, vosMap);
 
 		LocalDate today = getCurrentLocalDate();
 		expireMembers(today);
 		validateMembers(today);
+	}
+
+	private void auditSponsorshipExpirations() {
+		IntStream.of(1, 7, 14)
+				.forEach(this::auditSponsorshipExpirationsInDays);
+
+		// need to use 28 days instead of plusMonth(1), otherwise, some days might be skipped or
+		// processed multiple times
+		LocalDate nextMonth = getCurrentLocalDate().plusDays(28);
+
+		auditSponsorshipExpirationsForDate(nextMonth,
+				sponsorship -> perun.getAuditer().log(sess, new SponsorshipExpirationInAMonth(sponsorship)));
+	}
+
+	private void auditSponsorshipExpirationsInDays(int days) {
+		LocalDate today = getCurrentLocalDate();
+
+		auditSponsorshipExpirationsForDate(today.plusDays(days),
+				sponsorship -> perun.getAuditer().log(sess, new SponsorshipExpirationInDays(sponsorship, days)));
+	}
+
+	private void auditSponsorshipExpirationsForDate(LocalDate date, Consumer<EnrichedSponsorship> auditAction) {
+		perun.getMembersManagerBl().getSponsorshipsExpiringInRange(sess, date, date).stream()
+				.map(this::convertSponsorshipToEnriched)
+				.forEach(auditAction);
+	}
+
+	private EnrichedSponsorship convertSponsorshipToEnriched(Sponsorship sponsorship) {
+		EnrichedSponsorship es = new EnrichedSponsorship();
+		es.setActive(sponsorship.isActive());
+		es.setValidityTo(sponsorship.getValidityTo());
+		try {
+			es.setSponsor(perun.getUsersManagerBl().getUserById(sess, sponsorship.getSponsorId()));
+			es.setSponsoredMember(perun.getMembersManagerBl().getMemberById(sess, sponsorship.getSponsoredId()));
+		} catch (UserNotExistsException | MemberNotExistsException e) {
+			throw new InternalErrorException(e);
+		}
+		return es;
 	}
 
 	/**

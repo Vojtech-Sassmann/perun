@@ -367,4 +367,6 @@ public interface MembersManagerImplApi {
 	 * @throws SponsorshipDoesNotExistException if the given user is not sponsor of the given member
 	 */
 	void updateSponsorshipValidity(PerunSession sess, Member sponsoredMember, User sponsor, LocalDate newValidity) throws SponsorshipDoesNotExistException;
+
+	List<Sponsorship> getSponsorshipsExpiringInRange(PerunSession sess, LocalDate from, LocalDate to);
 }
