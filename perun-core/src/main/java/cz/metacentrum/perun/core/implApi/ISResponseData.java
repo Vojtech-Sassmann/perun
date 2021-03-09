@@ -1,0 +1,36 @@
+package cz.metacentrum.perun.core.implApi;
+
+import org.w3c.dom.Document;
+
+/**
+ * @author Vojtech Sassmann <vojtech.sassmann@gmail.com>
+ */
+public class ISResponseData {
+	private String status;
+	private String error;
+	private Document response;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Document getResponse() {
+		return response;
+	}
+
+	public void setResponse(Document response) {
+		this.response = response;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+}

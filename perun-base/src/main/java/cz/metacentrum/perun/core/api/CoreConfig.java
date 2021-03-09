@@ -71,6 +71,7 @@ public class CoreConfig {
 	private List<String> allowedCorsDomains;
 	private String pdfFontPath;
 	private String smtpHost;
+	private String muPasswordStrengthTestLogin;
 	private int smtpPort;
 	private boolean smtpAuth;
 	private boolean smtpStartTls;
@@ -692,5 +693,13 @@ public class CoreConfig {
 
 	public void setAttributesToKeep(List<String> attributesToKeep) {
 		this.attributesToKeep = attributesToKeep;
+	}
+
+	public String getMuPasswordStrengthTestLogin() {
+		return muPasswordStrengthTestLogin;
+	}
+
+	public void setMuPasswordStrengthTestLogin(String muPasswordStrengthTestLogin) {
+		this.muPasswordStrengthTestLogin = muPasswordStrengthTestLogin;
 	}
 }

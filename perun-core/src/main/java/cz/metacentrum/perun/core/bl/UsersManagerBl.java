@@ -1435,6 +1435,7 @@ public interface UsersManagerBl {
 	 */
 	String changePasswordRandom(PerunSession session, User user, String loginNamespace) throws PasswordOperationTimeoutException, LoginNotExistsException, PasswordChangeFailedException, InvalidLoginException, PasswordStrengthException;
 
+	void checkPasswordStrength(PerunSession sess, String password, String namespace) throws PasswordStrengthException;
 	/**
 	 * Return all groups where user is active (has VALID status in VO and Group together)
 	 * for specified user and resource

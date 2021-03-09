@@ -29,6 +29,7 @@
 		<property name="mailchangeBackupFrom" value="${perun.mailchange.backupFrom}"/>
 		<property name="mailchangeSecretKey" value="${perun.mailchange.secretKey}"/>
 		<property name="mailchangeValidationWindow" value="${perun.mailchange.validationWindow}"/>
+		<property name="muPasswordStrengthTestLogin" value="${perun.muPasswordStrengthTestLogin}"/>
 		<property name="nativeLanguage" value="${perun.native.language}"/>
 		<property name="notificationPrincipals" value="#{'${perun.notification.principals}'.split('\s*,\s*')}"/>
 		<property name="passwordManagerProgram" value="${perun.passwordManager.program}"/>
