@@ -10,6 +10,14 @@ import org.slf4j.LoggerFactory;
 
 public class MuadmPasswordManagerModule extends GenericPasswordManagerModule {
 
+	public MuadmPasswordManagerModule() {
+		actualLoginNamespace = "mu-adm";
+
+		if (!binTrue.equals(this.passwordManagerProgram)) {
+			passwordManagerProgram += "." + actualLoginNamespace;
+		}
+	}
+
 	private final static Logger log = LoggerFactory.getLogger(MuadmPasswordManagerModule.class);
 
 	@Override
